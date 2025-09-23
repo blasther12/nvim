@@ -12,8 +12,6 @@ return {
       ft = 'lua', -- only load on lua files
       opts = {
         library = {
-          -- See the configuration section for more details
-          -- Load luvit types when the `vim.uv` word is found
           { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
         },
       },
@@ -22,6 +20,7 @@ return {
   config = function()
     -- installing linters/lsp/formatters
     local packages = {
+      -- já existentes
       'bash-language-server',
       'dockerfile-language-server',
       'goimports',
@@ -34,7 +33,16 @@ return {
       'shfmt',
       'stylua',
       'yaml-language-server',
+
+      -- node / typescript / extras
+      'typescript-language-server',
+      'eslint-lsp',
+      'prettierd', -- mais rápido que prettier CLI
+      'html-lsp',
+      'css-lsp',
+      'emmet-ls',
     }
+
     local registry = require 'mason-registry'
     for _, pkg in pairs(packages) do
       if not registry.is_installed(pkg) then
@@ -42,14 +50,12 @@ return {
       end
     end
 
-    -- This is where you enable features that only work
-    -- if there is a language server active in the file
     vim.api.nvim_create_autocmd('LspAttach', {
       desc = 'LSP actions',
       callback = function(event)
         local opts = { buffer = event.buf }
-
         local builtin = require 'telescope.builtin'
+
         vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
         vim.keymap.set('n', 'gd', builtin.lsp_definitions, opts)
         vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
@@ -77,6 +83,7 @@ return {
     }
 
     vim.lsp.enable {
+      -- já existentes
       'bashls',
       'dockerls',
       'gopls',
@@ -85,6 +92,13 @@ return {
       'pyright',
       'ruff',
       'yamlls',
+
+      -- node/ts extras
+      'tsserver',
+      'eslint',
+      'html',
+      'cssls',
+      'emmet_ls',
     }
 
     vim.diagnostic.config {
@@ -99,5 +113,19 @@ return {
         },
       },
     }
+
+    -- autoformat com prettier / prettierd para JS/TS/HTML/CSS
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      pattern = { '*.js', '*.ts', '*.jsx', '*.tsx', '*.json', '*.css', '*.scss', '*.html' },
+      callback = function(args)
+        vim.lsp.buf.format {
+          async = false,
+          bufnr = args.buf,
+          filter = function(client)
+            return client.name == 'prettierd' or client.name == 'null-ls'
+          end,
+        }
+      end,
+    })
   end,
 }

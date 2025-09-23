@@ -13,7 +13,7 @@ return {
 
     wk.add {
       -- ============================================
-      -- Comandos básicos (os que você mapeou no init)
+      -- Comandos básicos
       -- ============================================
       { '<leader>h', '<cmd>split<cr>', desc = 'Split horizontal' },
       { '<leader>v', '<cmd>vsplit<cr>', desc = 'Split vertical' },
@@ -59,7 +59,7 @@ return {
       { '<leader>gN', '<cmd>Gitsigns prev_hunk<cr>', desc = 'Hunk anterior' },
 
       -- ============================================
-      -- LSP (via nvim-lspconfig + noice)
+      -- LSP
       -- ============================================
       { 'K', vim.lsp.buf.hover, desc = 'Hover docs' },
       { 'gd', vim.lsp.buf.definition, desc = 'Ir para definição' },
@@ -67,6 +67,23 @@ return {
       { 'gi', vim.lsp.buf.implementation, desc = 'Implementação' },
       { '<leader>rn', vim.lsp.buf.rename, desc = 'Renomear símbolo' },
       { '<leader>ca', vim.lsp.buf.code_action, desc = 'Code Action' },
+
+      -- ============================================
+      -- Movimento de linha
+      -- ============================================
+      { '<A-j>', ':m .+1<CR>==', desc = 'Mover linha para baixo', mode = 'n' },
+      { '<A-k>', ':m .-2<CR>==', desc = 'Mover linha para cima', mode = 'n' },
+      { '<A-j>', ":m '>+1<CR>gv=gv", desc = 'Mover seleção para baixo', mode = 'v' },
+      { '<A-k>', ":m '<-2<CR>gv=gv", desc = 'Mover seleção para cima', mode = 'v' },
+
+      -- ============================================
+      -- Diagnósticos (erros/avisos LSP)
+      -- ============================================
+      { '<leader>d', group = 'Diagnósticos' },
+      { '<leader>dn', vim.diagnostic.goto_next, desc = 'Próximo diagnóstico' },
+      { '<leader>dN', vim.diagnostic.goto_prev, desc = 'Diagnóstico anterior' },
+      { '<leader>do', vim.diagnostic.open_float, desc = 'Ver detalhe do erro' },
+      { '<leader>dl', '<cmd>Telescope diagnostics<cr>', desc = 'Listar diagnósticos' },
     }
   end,
 }

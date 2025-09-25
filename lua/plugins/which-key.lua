@@ -84,6 +84,30 @@ return {
       { '<leader>dN', vim.diagnostic.goto_prev, desc = 'Diagnóstico anterior' },
       { '<leader>do', vim.diagnostic.open_float, desc = 'Ver detalhe do erro' },
       { '<leader>dl', '<cmd>Telescope diagnostics<cr>', desc = 'Listar diagnósticos' },
+
+      -- ============================================
+      -- Copilot
+      -- ============================================
+      { '<leader>p', group = 'Copilot' },
+      { '<leader>pe', '<cmd>Copilot enable<cr>', desc = 'Habilitar Copilot' },
+      { '<leader>pd', '<cmd>Copilot disable<cr>', desc = 'Desabilitar Copilot' },
+      { '<leader>ps', '<cmd>Copilot status<cr>', desc = 'Status Copilot' },
+      { '<leader>pp', '<cmd>Copilot panel<cr>', desc = 'Abrir painel' },
+      { '<leader>ph', '<cmd>Copilot help<cr>', desc = 'Ajuda Copilot' },
+
+      -- Sugestões inline (modo insert)
+      { '<C-l>', 'copilot#Accept("<CR>")', desc = 'Aceitar sugestão', expr = true, replace_keycodes = false, mode = 'i' },
+      { '<C-.>', 'copilot#Next()', desc = 'Próxima sugestão', expr = true, mode = 'i' },
+      { '<C-,>', 'copilot#Previous()', desc = 'Sugestão anterior', expr = true, mode = 'i' },
+      { '<C-x>', 'copilot#Dismiss()', desc = 'Fechar sugestão', expr = true, mode = 'i' },
+
+      -- ============================================
+      -- Markdown Preview
+      -- ============================================
+      { '<leader>m', group = 'Markdown' },
+      { '<leader>mp', '<cmd>MarkdownPreview<cr>', desc = 'Abrir preview' },
+      { '<leader>ms', '<cmd>MarkdownPreviewStop<cr>', desc = 'Fechar preview' },
+      { '<leader>mt', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Alternar preview' },
     }
   end,
 }

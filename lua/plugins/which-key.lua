@@ -61,7 +61,7 @@ return {
       -- ============================================
       -- LSP
       -- ============================================
-      { 'K', vim.lsp.buf.hover, desc = 'Hover docs' },
+      { 'KK', vim.lsp.buf.hover, desc = 'Hover docs' },
       { 'gd', vim.lsp.buf.definition, desc = 'Ir para definição' },
       { 'gr', vim.lsp.buf.references, desc = 'Referências' },
       { 'gi', vim.lsp.buf.implementation, desc = 'Implementação' },
@@ -108,6 +108,24 @@ return {
       { '<leader>mp', '<cmd>MarkdownPreview<cr>', desc = 'Abrir preview' },
       { '<leader>ms', '<cmd>MarkdownPreviewStop<cr>', desc = 'Fechar preview' },
       { '<leader>mt', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Alternar preview' },
+
+      { '<leader>l', group = 'Linhas / Mover' },
+      { '<leader>lj', ":m '>+1<CR>gv=gv", mode = 'v', desc = 'Mover seleção para baixo' },
+      { '<leader>lk', ":m '<-2<CR>gv=gv", mode = 'v', desc = 'Mover seleção para cima' },
+      { '<leader>lj', ':m .+1<CR>==', mode = 'n', desc = 'Mover linha para baixo' },
+      { '<leader>lk', ':m .-2<CR>==', mode = 'n', desc = 'Mover linha para cima' },
+
+      -- Atalhos diretos (não aparecem no menu which-key)
+      { 'J', ":m '>+1<CR>gv=gv", mode = 'v', desc = 'Mover linha(s) p/ baixo' },
+      { 'K', ":m '<-2<CR>gv=gv", mode = 'v', desc = 'Mover linha(s) p/ cima' },
+
+      { '<leader>cc', group = 'CopilotChat' },
+      { '<leader>cce', '<cmd>CopilotChatExplain<cr>', desc = 'CopilotChat - Explicar código' },
+      { '<leader>cct', '<cmd>CopilotChatTests<cr>', desc = 'CopilotChat - Gerar testes' },
+      { '<leader>ccf', '<cmd>CopilotChatFix<cr>', desc = 'CopilotChat - Corrigir código' },
+      { '<leader>ccc', '<cmd>CopilotChatCommit<cr>', desc = 'CopilotChat - Gerar commit' },
+      { '<leader>ccr', '<cmd>CopilotChatReview<cr>', desc = 'CopilotChat - Revisar código' },
+      { '<leader>cch', '<cmd>CopilotChat<cr>', desc = 'CopilotChat - Abrir chat' },
     }
   end,
 }

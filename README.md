@@ -2,8 +2,6 @@
 
 🌙 Neovim configuration with lua.
 
-![Imagem do vim](vim.png)
-
 ## Install
 
 **Prerequisites**
@@ -19,3 +17,5 @@ git clone https://github.com/blasther12/nvim.git ~/.config/nvim
 ```
 
 2. Open Neovim. You should see a _"Downloading packer.."_ and then _"plugins installed"_ message in the first run
+
+ref: https://github.com/cassiobotaro/nvim
